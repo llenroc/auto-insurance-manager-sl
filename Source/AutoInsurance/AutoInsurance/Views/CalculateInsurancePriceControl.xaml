@@ -1,0 +1,153 @@
+﻿<UserControl xmlns:controlsToolkit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Toolkit"  xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"  x:Class="AutoInsurance.Views.CalculateInsurancePriceControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="800" d:DesignWidth="600" 
+             xmlns:riaControls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.DomainServices" 
+             xmlns:my="clr-namespace:AutoInsurance.Web.Services" 
+             xmlns:my1="clr-namespace:AutoInsurance.Web"
+             DataContext="{Binding Source={StaticResource Locator}, Path=CalculateInsurancePriceViewModel}"
+             >
+    <!--DataContext="{Binding Source={StaticResource Locator}, Path=CalculateInsuranceViewModelName}"-->
+    <Grid x:Name="LayoutRoot" Background="White">
+
+        <Grid HorizontalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="494*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Border  Grid.Column="0" Grid.Row="0"  >
+                <StackPanel Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center">
+                    <StackPanel>
+                        <TextBlock Text="Данни за МПС"  />
+                    </StackPanel>
+                    <!-- Search for and change all instances of CHANGEME -->
+                    <Grid Grid.Column="0" Grid.Row="0"
+                        Name="gridCalculationFields"
+                          Margin="5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <sdk:Label Grid.Column="0" Grid.Row="1" Content="Тип на автомобила" Margin="2" />
+                        <sdk:Label Grid.Column="0" Grid.Row="2" Content="Товароносимост" Margin="2" />
+                        <sdk:Label Grid.Column="0" Grid.Row="3" Content="Общ брой места (вкл. мястото на водача), &#x0a;както са описани в регистрационния талон* &#x0a; (Пример: 4+1 места се записват като 5)" Margin="2" />
+                        <sdk:Label Grid.Column="0" Grid.Row="4" Content="Първа година на регистрация" Margin="2" />
+                        <sdk:Label Grid.Column="0" Grid.Row="5" Content="Стаж на водача (години)" Margin="2" />
+                        <sdk:Label Grid.Column="0" Grid.Row="6" Content="Предназначение" Margin="2" />
+                        <!--Grid.Column="0" Grid.Row="7" Заети-->
+
+
+                        <!--<ComboBox Grid.Column="1" Grid.Row="0" SelectedItem="{Binding Path=CHANGEME, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" />-->
+                        <ComboBox Grid.Column="1" Grid.Row="1" Name="autoTypeCombobox" SelectedItem="{Binding Path=AutoType, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" Margin="2" 
+                                  DisplayMemberPath="Name"
+                                  ItemsSource="{Binding AutoTypes}"/>
+                        <TextBox Grid.Column="1" Grid.Row="2" Name="loadingCapacityTextBox" Text="{Binding LoadingCapacity, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="250" Margin="2" />
+                        <TextBox Grid.Column="1" Grid.Row="3" Name="seatsCountTextBox" Text="{Binding Path=SeatsCount, ValidatesOnDataErrors=True, NotifyOnValidationError=True, Mode=TwoWay}" HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="250" Margin="2" />
+                        <ComboBox Grid.Column="1" Grid.Row="4" Name="firstRegistrationYearComboBox" SelectedItem="{Binding Path=FirstRegistrationYear, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" Margin="2" 
+                                  ItemsSource="{Binding Years}"/>
+                        <!-- TODO - Add formatting converter for format: {0:F0} -->
+                        <TextBox Grid.Column="1" Grid.Row="5" Name="driverExperienceTextBox" Text="{Binding Path=DriverExperience, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}"   HorizontalAlignment="Stretch" VerticalAlignment="Top" Width="250" Margin="2" />
+                        <ComboBox Grid.Column="1" Grid.Row="6" Name="purposeComboBox" SelectedItem="{Binding Path=Purpose, Mode=TwoWay, NotifyOnValidationError=True, ValidatesOnExceptions=True}" Margin="2"
+                                  DisplayMemberPath="Name"
+                                  ItemsSource="{Binding Purposes}"/>
+                        <StackPanel Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2">
+                            <Button Content="Изчисли" Margin="10" Command="{Binding CalculateCommand}"/>
+
+                        </StackPanel>
+                        <sdk:DataGrid Grid.Row="8" Grid.ColumnSpan="2"
+                            AutoGenerateColumns="False" Height="Auto" 
+                                      HorizontalAlignment="Stretch" 
+                                      ItemsSource="{Binding CalculatedInsuaranceList}"
+                                      Name="insurancePricesDataGrid" 
+                                      RowDetailsVisibilityMode="VisibleWhenSelected" 
+                                      VerticalAlignment="Stretch" 
+                                      IsReadOnly="True" 
+                                      GridLinesVisibility="All" 
+                                      Width="Auto"
+                                      SelectedItem="{Binding SelectedCalculatedInsurance, Mode=TwoWay}"
+                                      >
+                            <sdk:DataGrid.Columns>
+                                <sdk:DataGridTemplateColumn x:Name="companyColumn" 
+                                                        Header="Застрахователна компания" 
+                                                        Width="SizeToHeader" >
+                                    <sdk:DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBlock Text="{Binding CompanyName}" Margin="5" FontSize="{StaticResource ResultLabelFontSize}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </sdk:DataGridTemplateColumn.CellTemplate>
+                                </sdk:DataGridTemplateColumn>
+                                <sdk:DataGridTemplateColumn x:Name="priceColumn" 
+                                                        Header="Сума за плащане (лв)" 
+                                                        Width="SizeToHeader" >
+                                    <sdk:DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBlock Text="{Binding Price}" Margin="5"  FontSize="15" FontWeight="Bold"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </sdk:DataGridTemplateColumn.CellTemplate>
+                                </sdk:DataGridTemplateColumn>
+                                <!--<sdk:DataGridTemplateColumn x:Name="optionsColumn" 
+                                                        Header="" 
+                                                        Width="Auto" >
+                                    <sdk:DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+
+                                        </DataTemplate>
+                                    </sdk:DataGridTemplateColumn.CellTemplate>
+                                </sdk:DataGridTemplateColumn>-->
+
+                            </sdk:DataGrid.Columns>
+                        </sdk:DataGrid>
+                        <StackPanel Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" Margin="5" DataContext="{Binding SelectedCalculatedInsurance}">
+                            <StackPanel Orientation="Horizontal">
+                                <!--<TextBlock Margin="3">Избрано предложение:</TextBlock>
+                                <StackPanel  DataContext="{Binding SelectedCalculatedInsurance}" Orientation="Horizontal">
+                                    <TextBlock Margin="3" Text="{Binding CompanyName}"/>
+                                    <TextBlock Margin="3" Text="{Binding Price}"/>
+                                </StackPanel>-->
+                            </StackPanel>
+                            <Button Content="Попълване на полица" Command="{Binding Path=DataContext.LaunchEditInsurancePolicyCommand, ElementName=LayoutRoot}" />
+                        </StackPanel>
+                        <!--<ItemsControl Grid.Column="1" Grid.Row="8"
+                            ItemsSource="{Binding CalculatedInsuaranceList}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding CompanyName}" Margin="5" FontSize="{StaticResource ResultLabelFontSize}"/>
+                                        <TextBlock Text="{Binding Price}" Margin="5"  FontSize="{StaticResource ResultPriceFontSize}" FontWeight="Bold"/>
+                                    </StackPanel>
+                                </DataTemplate>                                
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>-->
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+        </Grid>
+    </Grid>
+</UserControl>

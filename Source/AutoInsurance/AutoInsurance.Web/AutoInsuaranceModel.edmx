@@ -1,0 +1,619 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="AutoInsuarance.Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="AutoInsuaranceModelStoreContainer">
+    <EntitySet Name="Agencies" EntityType="AutoInsuarance.Model.Store.Agencies" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Autos" EntityType="AutoInsuarance.Model.Store.Autos" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AutoTypes" EntityType="AutoInsuarance.Model.Store.AutoTypes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Companies" EntityType="AutoInsuarance.Model.Store.Companies" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="FuelTypes" EntityType="AutoInsuarance.Model.Store.FuelTypes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="InsurancePolicies" EntityType="AutoInsuarance.Model.Store.InsurancePolicies" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Persons" EntityType="AutoInsuarance.Model.Store.Persons" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Purposes" EntityType="AutoInsuarance.Model.Store.Purposes" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_InsuarancePolicy_Agencies" Association="AutoInsuarance.Model.Store.FK_InsuarancePolicy_Agencies">
+      <End Role="Agencies" EntitySet="Agencies" />
+      <End Role="InsurancePolicy" EntitySet="InsurancePolicies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Autos_AutoTypes" Association="AutoInsuarance.Model.Store.FK_Autos_AutoTypes">
+      <End Role="AutoTypes" EntitySet="AutoTypes" />
+      <End Role="Autos" EntitySet="Autos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Autos_FuelTypes" Association="AutoInsuarance.Model.Store.FK_Autos_FuelTypes">
+      <End Role="FuelTypes" EntitySet="FuelTypes" />
+      <End Role="Autos" EntitySet="Autos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Autos_Persons" Association="AutoInsuarance.Model.Store.FK_Autos_Persons">
+      <End Role="Persons" EntitySet="Persons" />
+      <End Role="Autos" EntitySet="Autos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Autos_Purposes" Association="AutoInsuarance.Model.Store.FK_Autos_Purposes">
+      <End Role="Purposes" EntitySet="Purposes" />
+      <End Role="Autos" EntitySet="Autos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InsurancePolicy_Autos" Association="AutoInsuarance.Model.Store.FK_InsurancePolicy_Autos">
+      <End Role="Autos" EntitySet="Autos" />
+      <End Role="InsurancePolicy" EntitySet="InsurancePolicies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InsuarancePolicy_Companies" Association="AutoInsuarance.Model.Store.FK_InsuarancePolicy_Companies">
+      <End Role="Companies" EntitySet="Companies" />
+      <End Role="InsurancePolicy" EntitySet="InsurancePolicies" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Agencies">
+    <Key>
+      <PropertyRef Name="AgencyId" />
+    </Key>
+    <Property Name="AgencyId" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Address" Type="nvarchar" Nullable="true" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Autos">
+    <Key>
+      <PropertyRef Name="AutoId" />
+    </Key>
+    <Property Name="AutoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RegNumber" Type="nvarchar" Nullable="true" MaxLength="15" />
+    <Property Name="FrameNumber" Type="nvarchar" Nullable="true" MaxLength="20" />
+    <Property Name="EngineDisplacement" Type="int" Nullable="true" />
+    <Property Name="Make" Type="nvarchar" Nullable="true" MaxLength="32" />
+    <Property Name="Model" Type="nvarchar" Nullable="true" MaxLength="32" />
+    <Property Name="Description" Type="nvarchar" Nullable="true" MaxLength="255" />
+    <Property Name="Color" Type="nvarchar" Nullable="true" MaxLength="32" />
+    <Property Name="OwnerPersonId" Type="int" Nullable="true" />
+    <Property Name="AutoTypeId" Type="int" Nullable="true" />
+    <Property Name="PurposeId" Type="int" Nullable="true" />
+    <Property Name="FirstRegistrationDate" Type="datetime" Nullable="true" />
+    <Property Name="MakeYear" Type="int" Nullable="true" />
+    <Property Name="SeatsCount" Type="int" Nullable="true" />
+    <Property Name="DoorsCount" Type="int" Nullable="true" />
+    <Property Name="FuelTypeId" Type="int" Nullable="true" />
+    <Property Name="LoadingCapacity" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="AutoTypes">
+    <Key>
+      <PropertyRef Name="AutoTypeId" />
+    </Key>
+    <Property Name="AutoTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="true" MaxLength="32" />
+    <Property Name="Coeficient" Type="decimal" Nullable="true" Precision="15" Scale="2" />
+    <Property Name="HasLoadingCapacity" Type="bit" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Companies">
+    <Key>
+      <PropertyRef Name="CompanyId" />
+    </Key>
+    <Property Name="CompanyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="true" MaxLength="30" />
+    <Property Name="InsuranceBasePrice" Type="decimal" Nullable="true" Precision="19" Scale="4" />
+    <Property Name="YoungDriverCoeficient" Type="decimal" Nullable="true" Precision="15" Scale="2" />
+    <Property Name="OldDriverCoeficient" Type="decimal" Nullable="true" Precision="15" Scale="2" />
+    <Property Name="PurposePrice" Type="decimal" Nullable="true" Precision="15" Scale="2" />
+    <Property Name="AutoTypePrice" Type="decimal" Nullable="true" Precision="15" Scale="2" />
+    <Property Name="VechicleDisplacementPrice" Type="decimal" Nullable="true" Precision="15" Scale="2" />
+    <Property Name="LoadingCapacityPricePer1000kg" Type="decimal" Nullable="true" Precision="15" Scale="2" />
+  </EntityType>
+  <EntityType Name="FuelTypes">
+    <Key>
+      <PropertyRef Name="FuelTypeId" />
+    </Key>
+    <Property Name="FuelTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="true" MaxLength="32" />
+  </EntityType>
+  <EntityType Name="InsurancePolicies">
+    <Key>
+      <PropertyRef Name="InsurancePolicyId" />
+    </Key>
+    <Property Name="InsurancePolicyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CompanyId" Type="int" Nullable="true" />
+    <Property Name="Number" Type="varchar" StoreGeneratedPattern="Computed" Nullable="true" MaxLength="8" />
+    <Property Name="IssueDate" Type="datetime" Nullable="true" />
+    <Property Name="EndDate" Type="datetime" Nullable="true" />
+    <Property Name="AgencyName" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="AutoId" Type="int" Nullable="true" />
+    <Property Name="Price" Type="decimal" Nullable="true" Precision="15" Scale="2" />
+    <Property Name="DriverExperienceYears" Type="int" Nullable="true" />
+    <Property Name="HasAccidents" Type="bit" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Persons">
+    <Key>
+      <PropertyRef Name="PersonId" />
+    </Key>
+    <Property Name="PersonId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Number" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Address" Type="nvarchar" Nullable="true" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Purposes">
+    <Key>
+      <PropertyRef Name="PurposeId" />
+    </Key>
+    <Property Name="PurposeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="true" MaxLength="32" />
+    <Property Name="Coeficient" Type="decimal" Nullable="true" Precision="15" Scale="2" />
+  </EntityType>
+  <Association Name="FK_InsuarancePolicy_Agencies">
+    <End Role="Agencies" Type="AutoInsuarance.Model.Store.Agencies" Multiplicity="0..1" />
+    <End Role="InsurancePolicy" Type="AutoInsuarance.Model.Store.InsurancePolicies" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Agencies">
+        <PropertyRef Name="AgencyId" />
+      </Principal>
+      <Dependent Role="InsurancePolicy">
+        <PropertyRef Name="AgencyName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Autos_AutoTypes">
+    <End Role="AutoTypes" Type="AutoInsuarance.Model.Store.AutoTypes" Multiplicity="0..1" />
+    <End Role="Autos" Type="AutoInsuarance.Model.Store.Autos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AutoTypes">
+        <PropertyRef Name="AutoTypeId" />
+      </Principal>
+      <Dependent Role="Autos">
+        <PropertyRef Name="AutoTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Autos_FuelTypes">
+    <End Role="FuelTypes" Type="AutoInsuarance.Model.Store.FuelTypes" Multiplicity="0..1" />
+    <End Role="Autos" Type="AutoInsuarance.Model.Store.Autos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FuelTypes">
+        <PropertyRef Name="FuelTypeId" />
+      </Principal>
+      <Dependent Role="Autos">
+        <PropertyRef Name="FuelTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Autos_Persons">
+    <End Role="Persons" Type="AutoInsuarance.Model.Store.Persons" Multiplicity="0..1" />
+    <End Role="Autos" Type="AutoInsuarance.Model.Store.Autos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Persons">
+        <PropertyRef Name="PersonId" />
+      </Principal>
+      <Dependent Role="Autos">
+        <PropertyRef Name="OwnerPersonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Autos_Purposes">
+    <End Role="Purposes" Type="AutoInsuarance.Model.Store.Purposes" Multiplicity="0..1" />
+    <End Role="Autos" Type="AutoInsuarance.Model.Store.Autos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Purposes">
+        <PropertyRef Name="PurposeId" />
+      </Principal>
+      <Dependent Role="Autos">
+        <PropertyRef Name="PurposeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InsurancePolicy_Autos">
+    <End Role="Autos" Type="AutoInsuarance.Model.Store.Autos" Multiplicity="0..1" />
+    <End Role="InsurancePolicy" Type="AutoInsuarance.Model.Store.InsurancePolicies" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Autos">
+        <PropertyRef Name="AutoId" />
+      </Principal>
+      <Dependent Role="InsurancePolicy">
+        <PropertyRef Name="AutoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InsuarancePolicy_Companies">
+    <End Role="Companies" Type="AutoInsuarance.Model.Store.Companies" Multiplicity="0..1" />
+    <End Role="InsurancePolicy" Type="AutoInsuarance.Model.Store.InsurancePolicies" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Companies">
+        <PropertyRef Name="CompanyId" />
+      </Principal>
+      <Dependent Role="InsurancePolicy">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AutoInsuarance.Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="AutoInsuaranceEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Agencies" EntityType="AutoInsuarance.Model.Agency" />
+          <EntitySet Name="Autos" EntityType="AutoInsuarance.Model.Auto" />
+          <EntitySet Name="AutoTypes" EntityType="AutoInsuarance.Model.AutoType" />
+          <EntitySet Name="Companies" EntityType="AutoInsuarance.Model.Company" />
+          <EntitySet Name="FuelTypes" EntityType="AutoInsuarance.Model.FuelType" />
+          <EntitySet Name="InsurancePolicies" EntityType="AutoInsuarance.Model.InsurancePolicy" />
+          <EntitySet Name="Persons" EntityType="AutoInsuarance.Model.Person" />
+          <EntitySet Name="Purposes" EntityType="AutoInsuarance.Model.Purpose" />
+          <AssociationSet Name="FK_InsuarancePolicy_Agencies" Association="AutoInsuarance.Model.FK_InsuarancePolicy_Agencies">
+            <End Role="Agencies" EntitySet="Agencies" />
+            <End Role="InsurancePolicy" EntitySet="InsurancePolicies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Autos_AutoTypes" Association="AutoInsuarance.Model.FK_Autos_AutoTypes">
+            <End Role="AutoTypes" EntitySet="AutoTypes" />
+            <End Role="Autos" EntitySet="Autos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Autos_FuelTypes" Association="AutoInsuarance.Model.FK_Autos_FuelTypes">
+            <End Role="FuelTypes" EntitySet="FuelTypes" />
+            <End Role="Autos" EntitySet="Autos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Autos_Persons" Association="AutoInsuarance.Model.FK_Autos_Persons">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="Autos" EntitySet="Autos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Autos_Purposes" Association="AutoInsuarance.Model.FK_Autos_Purposes">
+            <End Role="Purposes" EntitySet="Purposes" />
+            <End Role="Autos" EntitySet="Autos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InsurancePolicy_Autos" Association="AutoInsuarance.Model.FK_InsurancePolicy_Autos">
+            <End Role="Autos" EntitySet="Autos" />
+            <End Role="InsurancePolicy" EntitySet="InsurancePolicies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InsuarancePolicy_Companies" Association="AutoInsuarance.Model.FK_InsuarancePolicy_Companies">
+            <End Role="Companies" EntitySet="Companies" />
+            <End Role="InsurancePolicy" EntitySet="InsurancePolicies" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Agency">
+          <Key>
+            <PropertyRef Name="AgencyId" />
+          </Key>
+          <Property Name="AgencyId" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Address" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="InsurancePolicies" Relationship="AutoInsuarance.Model.FK_InsuarancePolicy_Agencies" FromRole="Agencies" ToRole="InsurancePolicy" />
+        </EntityType>
+        <EntityType Name="Auto">
+          <Key>
+            <PropertyRef Name="AutoId" />
+          </Key>
+          <Property Name="AutoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RegNumber" Type="String" MaxLength="15" Unicode="true" FixedLength="false" />
+          <Property Name="FrameNumber" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="EngineDisplacement" Type="Int32" />
+          <Property Name="Make" Type="String" MaxLength="32" Unicode="true" FixedLength="false" />
+          <Property Name="Model" Type="String" MaxLength="32" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Color" Type="String" MaxLength="32" Unicode="true" FixedLength="false" />
+          <Property Name="OwnerPersonId" Type="Int32" />
+          <Property Name="AutoTypeId" Type="Int32" />
+          <Property Name="PurposeId" Type="Int32" />
+          <Property Name="FirstRegistrationDate" Type="DateTime" />
+          <Property Name="MakeYear" Type="Int32" />
+          <Property Name="SeatsCount" Type="Int32" />
+          <Property Name="DoorsCount" Type="Int32" />
+          <Property Name="FuelTypeId" Type="Int32" />
+          <Property Name="LoadingCapacity" Type="Int32" />
+          <NavigationProperty Name="AutoType" Relationship="AutoInsuarance.Model.FK_Autos_AutoTypes" FromRole="Autos" ToRole="AutoTypes" />
+          <NavigationProperty Name="FuelType" Relationship="AutoInsuarance.Model.FK_Autos_FuelTypes" FromRole="Autos" ToRole="FuelTypes" />
+          <NavigationProperty Name="Person" Relationship="AutoInsuarance.Model.FK_Autos_Persons" FromRole="Autos" ToRole="Persons" />
+          <NavigationProperty Name="Purpos" Relationship="AutoInsuarance.Model.FK_Autos_Purposes" FromRole="Autos" ToRole="Purposes" />
+          <NavigationProperty Name="InsurancePolicies" Relationship="AutoInsuarance.Model.FK_InsurancePolicy_Autos" FromRole="Autos" ToRole="InsurancePolicy" />
+        </EntityType>
+        <EntityType Name="AutoType">
+          <Key>
+            <PropertyRef Name="AutoTypeId" />
+          </Key>
+          <Property Name="AutoTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="32" Unicode="true" FixedLength="false" />
+          <Property Name="Coeficient" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="HasLoadingCapacity" Type="Boolean" />
+          <NavigationProperty Name="Autos" Relationship="AutoInsuarance.Model.FK_Autos_AutoTypes" FromRole="AutoTypes" ToRole="Autos" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="CompanyId" />
+          </Key>
+          <Property Name="CompanyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="InsuranceBasePrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="YoungDriverCoeficient" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="OldDriverCoeficient" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="PurposePrice" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="AutoTypePrice" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="VechicleDisplacementPrice" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="LoadingCapacityPricePer1000kg" Type="Decimal" Precision="15" Scale="2" />
+          <NavigationProperty Name="InsurancePolicies" Relationship="AutoInsuarance.Model.FK_InsuarancePolicy_Companies" FromRole="Companies" ToRole="InsurancePolicy" />
+        </EntityType>
+        <EntityType Name="FuelType">
+          <Key>
+            <PropertyRef Name="FuelTypeId" />
+          </Key>
+          <Property Name="FuelTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="32" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Autos" Relationship="AutoInsuarance.Model.FK_Autos_FuelTypes" FromRole="FuelTypes" ToRole="Autos" />
+        </EntityType>
+        <EntityType Name="InsurancePolicy">
+          <Key>
+            <PropertyRef Name="InsurancePolicyId" />
+          </Key>
+          <Property Name="InsurancePolicyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyId" Type="Int32" />
+          <Property Name="Number" Type="String" MaxLength="8" Unicode="false" FixedLength="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="IssueDate" Type="DateTime" />
+          <Property Name="EndDate" Type="DateTime" />
+          <Property Name="AgencyName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="AutoId" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="DriverExperienceYears" Type="Int32" />
+          <Property Name="HasAccidents" Type="Boolean" />
+          <NavigationProperty Name="Agency" Relationship="AutoInsuarance.Model.FK_InsuarancePolicy_Agencies" FromRole="InsurancePolicy" ToRole="Agencies" />
+          <NavigationProperty Name="Auto" Relationship="AutoInsuarance.Model.FK_InsurancePolicy_Autos" FromRole="InsurancePolicy" ToRole="Autos" />
+          <NavigationProperty Name="Company" Relationship="AutoInsuarance.Model.FK_InsuarancePolicy_Companies" FromRole="InsurancePolicy" ToRole="Companies" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Number" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Address" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Autos" Relationship="AutoInsuarance.Model.FK_Autos_Persons" FromRole="Persons" ToRole="Autos" />
+        </EntityType>
+        <EntityType Name="Purpose">
+          <Key>
+            <PropertyRef Name="PurposeId" />
+          </Key>
+          <Property Name="PurposeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="32" Unicode="true" FixedLength="false" />
+          <Property Name="Coeficient" Type="Decimal" Precision="15" Scale="2" />
+          <NavigationProperty Name="Autos" Relationship="AutoInsuarance.Model.FK_Autos_Purposes" FromRole="Purposes" ToRole="Autos" />
+        </EntityType>
+        <Association Name="FK_InsuarancePolicy_Agencies">
+          <End Role="Agencies" Type="AutoInsuarance.Model.Agency" Multiplicity="0..1" />
+          <End Role="InsurancePolicy" Type="AutoInsuarance.Model.InsurancePolicy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agencies">
+              <PropertyRef Name="AgencyId" />
+            </Principal>
+            <Dependent Role="InsurancePolicy">
+              <PropertyRef Name="AgencyName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Autos_AutoTypes">
+          <End Role="AutoTypes" Type="AutoInsuarance.Model.AutoType" Multiplicity="0..1" />
+          <End Role="Autos" Type="AutoInsuarance.Model.Auto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AutoTypes">
+              <PropertyRef Name="AutoTypeId" />
+            </Principal>
+            <Dependent Role="Autos">
+              <PropertyRef Name="AutoTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Autos_FuelTypes">
+          <End Role="FuelTypes" Type="AutoInsuarance.Model.FuelType" Multiplicity="0..1" />
+          <End Role="Autos" Type="AutoInsuarance.Model.Auto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FuelTypes">
+              <PropertyRef Name="FuelTypeId" />
+            </Principal>
+            <Dependent Role="Autos">
+              <PropertyRef Name="FuelTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Autos_Persons">
+          <End Role="Persons" Type="AutoInsuarance.Model.Person" Multiplicity="0..1" />
+          <End Role="Autos" Type="AutoInsuarance.Model.Auto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="Autos">
+              <PropertyRef Name="OwnerPersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Autos_Purposes">
+          <End Role="Purposes" Type="AutoInsuarance.Model.Purpose" Multiplicity="0..1" />
+          <End Role="Autos" Type="AutoInsuarance.Model.Auto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Purposes">
+              <PropertyRef Name="PurposeId" />
+            </Principal>
+            <Dependent Role="Autos">
+              <PropertyRef Name="PurposeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InsurancePolicy_Autos">
+          <End Role="Autos" Type="AutoInsuarance.Model.Auto" Multiplicity="0..1" />
+          <End Role="InsurancePolicy" Type="AutoInsuarance.Model.InsurancePolicy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Autos">
+              <PropertyRef Name="AutoId" />
+            </Principal>
+            <Dependent Role="InsurancePolicy">
+              <PropertyRef Name="AutoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InsuarancePolicy_Companies">
+          <End Role="Companies" Type="AutoInsuarance.Model.Company" Multiplicity="0..1" />
+          <End Role="InsurancePolicy" Type="AutoInsuarance.Model.InsurancePolicy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companies">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="InsurancePolicy">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AutoInsuaranceModelStoreContainer" CdmEntityContainer="AutoInsuaranceEntities">
+    <EntitySetMapping Name="Agencies">
+      <EntityTypeMapping TypeName="IsTypeOf(AutoInsuarance.Model.Agency)">
+        <MappingFragment StoreEntitySet="Agencies">
+          <ScalarProperty Name="AgencyId" ColumnName="AgencyId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Autos">
+      <EntityTypeMapping TypeName="IsTypeOf(AutoInsuarance.Model.Auto)">
+        <MappingFragment StoreEntitySet="Autos">
+          <ScalarProperty Name="AutoId" ColumnName="AutoId" />
+          <ScalarProperty Name="RegNumber" ColumnName="RegNumber" />
+          <ScalarProperty Name="FrameNumber" ColumnName="FrameNumber" />
+          <ScalarProperty Name="EngineDisplacement" ColumnName="EngineDisplacement" />
+          <ScalarProperty Name="Make" ColumnName="Make" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="OwnerPersonId" ColumnName="OwnerPersonId" />
+          <ScalarProperty Name="AutoTypeId" ColumnName="AutoTypeId" />
+          <ScalarProperty Name="PurposeId" ColumnName="PurposeId" />
+          <ScalarProperty Name="FirstRegistrationDate" ColumnName="FirstRegistrationDate" />
+          <ScalarProperty Name="MakeYear" ColumnName="MakeYear" />
+          <ScalarProperty Name="SeatsCount" ColumnName="SeatsCount" />
+          <ScalarProperty Name="DoorsCount" ColumnName="DoorsCount" />
+          <ScalarProperty Name="FuelTypeId" ColumnName="FuelTypeId" />
+          <ScalarProperty Name="LoadingCapacity" ColumnName="LoadingCapacity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AutoTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(AutoInsuarance.Model.AutoType)">
+        <MappingFragment StoreEntitySet="AutoTypes">
+          <ScalarProperty Name="AutoTypeId" ColumnName="AutoTypeId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Coeficient" ColumnName="Coeficient" />
+          <ScalarProperty Name="HasLoadingCapacity" ColumnName="HasLoadingCapacity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Companies">
+      <EntityTypeMapping TypeName="IsTypeOf(AutoInsuarance.Model.Company)">
+        <MappingFragment StoreEntitySet="Companies">
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="InsuranceBasePrice" ColumnName="InsuranceBasePrice" />
+          <ScalarProperty Name="YoungDriverCoeficient" ColumnName="YoungDriverCoeficient" />
+          <ScalarProperty Name="OldDriverCoeficient" ColumnName="OldDriverCoeficient" />
+          <ScalarProperty Name="PurposePrice" ColumnName="PurposePrice" />
+          <ScalarProperty Name="AutoTypePrice" ColumnName="AutoTypePrice" />
+          <ScalarProperty Name="VechicleDisplacementPrice" ColumnName="VechicleDisplacementPrice" />
+          <ScalarProperty Name="LoadingCapacityPricePer1000kg" ColumnName="LoadingCapacityPricePer1000kg" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FuelTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(AutoInsuarance.Model.FuelType)">
+        <MappingFragment StoreEntitySet="FuelTypes">
+          <ScalarProperty Name="FuelTypeId" ColumnName="FuelTypeId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InsurancePolicies">
+      <EntityTypeMapping TypeName="IsTypeOf(AutoInsuarance.Model.InsurancePolicy)">
+        <MappingFragment StoreEntitySet="InsurancePolicies">
+          <ScalarProperty Name="InsurancePolicyId" ColumnName="InsurancePolicyId" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="Number" ColumnName="Number" />
+          <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="AgencyName" ColumnName="AgencyName" />
+          <ScalarProperty Name="AutoId" ColumnName="AutoId" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="DriverExperienceYears" ColumnName="DriverExperienceYears" />
+          <ScalarProperty Name="HasAccidents" ColumnName="HasAccidents" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Persons">
+      <EntityTypeMapping TypeName="IsTypeOf(AutoInsuarance.Model.Person)">
+        <MappingFragment StoreEntitySet="Persons">
+          <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Number" ColumnName="Number" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Purposes">
+      <EntityTypeMapping TypeName="IsTypeOf(AutoInsuarance.Model.Purpose)">
+        <MappingFragment StoreEntitySet="Purposes">
+          <ScalarProperty Name="PurposeId" ColumnName="PurposeId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Coeficient" ColumnName="Coeficient" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="AutoInsuaranceModel" ZoomLevel="97">
+        <EntityTypeShape EntityType="AutoInsuarance.Model.Agency" Width="1.5" PointX="7.125" PointY="0.5" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="AutoInsuarance.Model.Auto" Width="1.5" PointX="3" PointY="1.125" Height="5.2494108072916656" IsExpanded="true" />
+        <EntityTypeShape EntityType="AutoInsuarance.Model.AutoType" Width="1.5" PointX="0.75" PointY="1.25" Height="1.9802864583333331" IsExpanded="true" />
+        <EntityTypeShape EntityType="AutoInsuarance.Model.Company" Width="1.5" PointX="7.375" PointY="2.875" Height="2.9417936197916674" IsExpanded="true" />
+        <EntityTypeShape EntityType="AutoInsuarance.Model.FuelType" Width="1.5" PointX="0.75" PointY="3.5" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="AutoInsuarance.Model.InsurancePolicy" Width="1.5" PointX="5.125" PointY="1.75" Height="3.5186979166666661" IsExpanded="true" />
+        <EntityTypeShape EntityType="AutoInsuarance.Model.Person" Width="1.5" PointX="10.25" PointY="4.5" Height="1.9802864583333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="AutoInsuarance.Model.Purpose" Width="1.5" PointX="1" PointY="5.25" Height="1.7879850260416674" IsExpanded="true" />
+        <AssociationConnector Association="AutoInsuarance.Model.FK_InsuarancePolicy_Agencies" ManuallyRouted="false">
+          <ConnectorPoint PointX="7.125" PointY="2.0189925130208337" />
+          <ConnectorPoint PointX="6.625" PointY="2.0189925130208337" />
+        </AssociationConnector>
+        <AssociationConnector Association="AutoInsuarance.Model.FK_Autos_AutoTypes" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="2.2401432291666667" />
+          <ConnectorPoint PointX="3" PointY="2.2401432291666667" />
+        </AssociationConnector>
+        <AssociationConnector Association="AutoInsuarance.Model.FK_Autos_FuelTypes" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="4.297841796875" />
+          <ConnectorPoint PointX="3" PointY="4.297841796875" />
+        </AssociationConnector>
+        <AssociationConnector Association="AutoInsuarance.Model.FK_Autos_Persons" ManuallyRouted="false">
+          <ConnectorPoint PointX="10.25" PointY="6.1268522135416665" />
+          <ConnectorPoint PointX="4.5" PointY="6.1268522135416665" />
+        </AssociationConnector>
+        <AssociationConnector Association="AutoInsuarance.Model.FK_Autos_Purposes" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.5" PointY="5.8122054036458328" />
+          <ConnectorPoint PointX="3" PointY="5.8122054036458328" />
+        </AssociationConnector>
+        <AssociationConnector Association="AutoInsuarance.Model.FK_InsurancePolicy_Autos" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="3.5093489583333328" />
+          <ConnectorPoint PointX="5.125" PointY="3.5093489583333328" />
+        </AssociationConnector>
+        <AssociationConnector Association="AutoInsuarance.Model.FK_InsuarancePolicy_Companies" ManuallyRouted="false">
+          <ConnectorPoint PointX="7.375" PointY="4.0718489583333328" />
+          <ConnectorPoint PointX="6.625" PointY="4.0718489583333328" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

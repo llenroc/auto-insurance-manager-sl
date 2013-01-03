@@ -1,0 +1,22 @@
+﻿<navigation:Page xmlns:my2="clr-namespace:AutoInsurance.Views"  x:Class="AutoInsurance.Views.InsurancePolicy" 
+           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+           mc:Ignorable="d"
+           xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation"
+           d:DesignWidth="800" d:DesignHeight="600"
+           Title="InsurancePolicy Page" xmlns:riaControls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.DomainServices" xmlns:my="clr-namespace:AutoInsurance.Web" xmlns:my1="clr-namespace:AutoInsurance.Web.Services" xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk">
+    <Grid x:Name="LayoutRoot">
+        <ScrollViewer x:Name="PageScrollViewer" Style="{StaticResource PageScrollViewerStyle}" >
+            <StackPanel>
+                <StackPanel x:Name="ContentStackPanel" Style="{StaticResource ContentStackPanelStyle}">
+                    <TextBlock x:Name="HeaderText" Style="{StaticResource HeaderTextStyle}" 
+                           Text="Полица за ГО" HorizontalAlignment="Center" />
+                </StackPanel>
+                <my2:InsurancePolicyControl />
+            </StackPanel>
+        </ScrollViewer>
+
+    </Grid>
+</navigation:Page>

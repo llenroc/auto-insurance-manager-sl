@@ -1,0 +1,16 @@
+BasePrice - Базова цена
+YoungDriverCoeficient - Коефициент за Неопитен водач
+OldDriverCoeficient - Коефициент за Опитен Водач
+AutoTypePrice - Цена за тип автомобил - умножава се по коефициент
+PurposePrice - Цена за предназначение - умножава се по коефициент
+RiskCoeficient - Рисков коефициент
+NoRiskCoeficient - Безрисков коефициент
+VechicleDisplacementPrice - Цена за кубатура
+
+Price =   (BasePrice * (DriverExperience < 5 ? YoungDriverCoeficient : OldDriverCoeficient)) 
+	+ (AutoTypePrice * AutoTypeCoeficient) 
+	+ (HasAccidents ? RiskCoeficient : NoRiskCoeficient)
+	+ (PurposePrice * PurposeCoefficient)	
+	+ (VechicleDisplacementPrice * VechicleDisplacement * (1/1000))
+
+cast(CompanyId as varchar(2)) + cast(InsuarancePolicyId as varchar(6))

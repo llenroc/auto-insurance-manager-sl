@@ -1,0 +1,139 @@
+﻿<UserControl xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"  x:Class="AutoInsurance.Views.InsurancePolicyControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="640" d:DesignWidth="600"
+    DataContext="{Binding Source={StaticResource Locator}, Path=InsurancePolicyViewModel}"
+             >
+
+    <Grid x:Name="LayoutRoot" Background="White" HorizontalAlignment="Center">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Column="0" Grid.Row="1"
+              HorizontalAlignment="Center" Margin="3" Name="grid1" VerticalAlignment="Top" MinWidth="600" Loaded="grid1_Loaded">
+            <!--DataContext="{Binding InsurancePolicy}"-->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition MinWidth="50" Width="Auto" />
+                <ColumnDefinition Width="Auto" MinWidth="50" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="29" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <sdk:Label Content="Номер на полицата:" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" />
+            <TextBox Grid.Column="1" Grid.Row="1" Height="23" HorizontalAlignment="Stretch" Margin="3" Name="numberTextBox" Text="{Binding Path=Number, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true, TargetNullValue=''}" VerticalAlignment="Center" Width="Auto" />
+            <sdk:Label Content="Дата на издаване:" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" Grid.ColumnSpan="1"  />
+            <sdk:DatePicker Grid.Column="3" Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="3" Name="issueDateDatePicker" SelectedDate="{Binding Path=IssueDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true, TargetNullValue=''}" VerticalAlignment="Center" Width="120"  />
+            <sdk:Label Content="Има ли предишни инциденти:" Grid.Column="2" Grid.Row="5" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" />
+            <CheckBox Content="" Grid.Column="3" Grid.Row="5" Height="16" HorizontalAlignment="Left" IsChecked="{Binding Path=HasAccidents, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true, TargetNullValue=''}" Margin="3" Name="hasAccidentsCheckBox" VerticalAlignment="Center" />
+            <sdk:Label Content="Опит на водача (години):" Grid.Column="0" Grid.Row="5" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" />
+            <TextBox Grid.Column="1" Grid.Row="5" Height="23" HorizontalAlignment="Left" Margin="3" Name="driverExperienceYearsTextBox" Text="{Binding Path=DriverExperienceYears, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true, TargetNullValue=''}" VerticalAlignment="Center" Width="120" />
+            <sdk:Label Content="Агенция:" Grid.Row="2" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" />
+            <TextBox Grid.Column="1" Grid.Row="2" Height="23" HorizontalAlignment="Stretch" Margin="3" Name="agencyNameTextBox" Text="{Binding Path=AgencyName, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true, TargetNullValue=''}" VerticalAlignment="Center" Width="Auto" Grid.ColumnSpan="2" />
+            <sdk:Label Content="Застрахователна компания:" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" />
+            <sdk:Label Content="Валидна до" Grid.Row="8" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" Grid.Column="2" />
+            <sdk:DatePicker Grid.Column="3" Grid.Row="8" Height="23" HorizontalAlignment="Left" Margin="3" Name="endDateDatePicker" SelectedDate="{Binding Path=EndDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true, TargetNullValue=''}" VerticalAlignment="Center" Width="120" />
+            <sdk:Label Content="Сума за плащане:" Grid.Row="8" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" />
+            <TextBox Grid.Column="1" Grid.Row="8" Height="23" HorizontalAlignment="Left" Margin="3" Name="priceTextBox" Text="{Binding Path=Price, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true, TargetNullValue=''}" VerticalAlignment="Center" Width="120" />
+            <Grid Grid.ColumnSpan="4" Grid.Row="3" Grid.RowSpan="1" HorizontalAlignment="Stretch" Margin="3" Name="grid2" VerticalAlignment="Top" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" MinWidth="50" />
+                    <ColumnDefinition MinWidth="50" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="29" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" MinHeight="30" />
+                </Grid.RowDefinitions>
+                <sdk:Label Content="Автомобил" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" FontSize="14" />
+                <sdk:Label Content="Тип:" Grid.Row="2" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" Grid.ColumnSpan="1" Grid.RowSpan="1" />
+                <!--<TextBox Grid.Column="1" Grid.Row="2" Height="23" HorizontalAlignment="Stretch" Margin="3" Name="autoTypeIdTextBox" Text="{Binding Path=Auto.AutoTypeId, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true, TargetNullValue=''}" VerticalAlignment="Center" Width="Auto" Grid.ColumnSpan="1" Grid.RowSpan="1" />-->
+                <ComboBox Grid.Column="1" Grid.Row="2" Height="23" HorizontalAlignment="Stretch" Margin="3" Name="autoTypeIdTextBox" SelectedValue="{Binding Path=Auto.AutoTypeId, Mode=OneWay, NotifyOnValidationError=true, ValidatesOnExceptions=true, TargetNullValue=''}" VerticalAlignment="Center" Width="Auto" Grid.ColumnSpan="1" Grid.RowSpan="1" SelectedValuePath="AutoTypeId" DisplayMemberPath="Name" ItemsSource="{Binding ElementName=LayoutRoot, Path=DataContext.AutoTypes}" />
+                <sdk:Label Content="Брой врати:" Grid.Column="0" Grid.Row="4" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" Grid.ColumnSpan="1" Grid.RowSpan="1" />
+                <TextBox Grid.Column="1" Grid.Row="4" Height="23" HorizontalAlignment="Stretch" Margin="3" Name="doorsCountTextBox" Text="{Binding Path=Auto.DoorsCount, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true, TargetNullValue=''}" VerticalAlignment="Center" Width="Auto" Grid.ColumnSpan="1" Grid.RowSpan="1" />
+                <sdk:Label Content="Обем на двигателя (мм 3):" Grid.Column="0" Grid.Row="5" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" Grid.ColumnSpan="1" Grid.RowSpan="1" />
+                <TextBox Grid.Column="1" Grid.Row="5" Height="23" HorizontalAlignment="Stretch" Margin="3" Name="engineDisplacementTextBox" Text="{Binding Path=Auto.EngineDisplacement, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true, TargetNullValue=''}" VerticalAlignment="Center" Width="Auto" Grid.ColumnSpan="1" Grid.RowSpan="1" />
+                <sdk:Label Content="Начална дата на рег.:" Grid.Column="0" Grid.Row="6" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" Grid.ColumnSpan="1" Grid.RowSpan="1" />
+                <sdk:DatePicker Grid.Column="1" Grid.Row="6" Height="23" HorizontalAlignment="Stretch" Margin="3" Name="firstRegistrationDateDatePicker" SelectedDate="{Binding Path=Auto.FirstRegistrationDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true, TargetNullValue=''}" VerticalAlignment="Center" Width="Auto" Grid.ColumnSpan="1" Grid.RowSpan="1" />
+                <sdk:Label Content="Рама номер:" Grid.Row="1" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" Grid.ColumnSpan="1" Grid.RowSpan="1" />
+                <TextBox Grid.Column="1" Height="23" HorizontalAlignment="Stretch" Margin="3,1,0,2" Name="frameNumberTextBox" Text="{Binding Path=Auto.FrameNumber, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true, TargetNullValue=''}" VerticalAlignment="Center" Width="Auto" Grid.Row="1" />
+                <sdk:Label Content="Гориво:" Grid.Column="0" Grid.Row="8" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" Grid.ColumnSpan="1" Grid.RowSpan="1" />
+                <!--<TextBox Grid.Column="1" Grid.Row="8" Height="23" HorizontalAlignment="Stretch" Margin="3" Name="fuelTypeIdTextBox" Text="{Binding Path=Auto.FuelTypeId, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true, TargetNullValue=''}" VerticalAlignment="Center" Width="Auto" Grid.ColumnSpan="1" Grid.RowSpan="1" />-->
+                <ComboBox Grid.Column="1" Grid.Row="8" Height="23" HorizontalAlignment="Stretch" Margin="3" Name="FuelTypeComboBox" SelectedValue="{Binding Path=Auto.FuelTypeId, Mode=OneWay, NotifyOnValidationError=true, ValidatesOnExceptions=true, TargetNullValue=''}" VerticalAlignment="Center" Width="Auto" Grid.ColumnSpan="1" Grid.RowSpan="1" SelectedValuePath="FuelTypeId" DisplayMemberPath="Name" ItemsSource="{Binding ElementName=LayoutRoot, Path=DataContext.FuelTypes}" />
+                <sdk:Label Content="Товар (кг)" Grid.Column="2" Grid.Row="5" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" Grid.ColumnSpan="1" Grid.RowSpan="1" />
+                <TextBox Grid.Column="3" Grid.Row="5" Height="23" HorizontalAlignment="Stretch" Margin="3" Name="loadingCapacityTextBox" Text="{Binding Path=Auto.LoadingCapacity, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true, TargetNullValue=''}" VerticalAlignment="Center" Width="Auto" Grid.ColumnSpan="1" Grid.RowSpan="1" />
+                <sdk:Label Content="Производител:" Grid.Column="0" Grid.Row="10" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" Grid.ColumnSpan="1" Grid.RowSpan="1" />
+                <TextBox Grid.Column="1" Grid.Row="10" Height="23" HorizontalAlignment="Stretch" Margin="3" Name="makeTextBox" Text="{Binding Path=Auto.Make, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true, TargetNullValue=''}" VerticalAlignment="Center" Width="Auto" Grid.ColumnSpan="1" Grid.RowSpan="1" FontWeight="Bold" />
+                <sdk:Label Content="Година на произв" Grid.Column="2" Grid.Row="6" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" Grid.ColumnSpan="1" Grid.RowSpan="1" />
+                <TextBox Grid.Column="3" Grid.Row="6" Height="23" HorizontalAlignment="Stretch" Margin="3" Name="makeYearTextBox" Text="{Binding Path=Auto.MakeYear, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true, TargetNullValue=''}" VerticalAlignment="Center" Width="Auto" Grid.RowSpan="1" Grid.ColumnSpan="1" />
+                <sdk:Label Content="Модел:" Grid.Column="2" Grid.Row="10" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" Grid.ColumnSpan="1" Grid.RowSpan="1" />
+                <TextBox Grid.Column="3" Grid.Row="10" Height="23" HorizontalAlignment="Stretch" Margin="3" Name="modelTextBox" Text="{Binding Path=Auto.Model, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true, TargetNullValue=''}" VerticalAlignment="Center" Width="Auto" Grid.ColumnSpan="1" Grid.RowSpan="1" />
+                <sdk:Label Content="Собственик:-Име" Grid.Column="0" Grid.Row="13" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" Grid.ColumnSpan="1" Grid.RowSpan="1" />
+                <TextBox Grid.Column="1" Grid.Row="13" Height="23" HorizontalAlignment="Stretch" Margin="3" Name="ownerPersonIdTextBox" Text="{Binding Path=Auto.Person.Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true, TargetNullValue=''}" VerticalAlignment="Center" Width="Auto" Grid.ColumnSpan="1" Grid.RowSpan="1" />
+                <sdk:Label Content="Предназначение:" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" Grid.ColumnSpan="1" Grid.RowSpan="1" />
+                <!--<TextBox Grid.Column="3" Grid.Row="2" Height="26" HorizontalAlignment="Stretch" Margin="3,3,0,3" Name="purposeIdTextBox" Text="{Binding Path=Auto.PurposeId, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true, TargetNullValue=''}" VerticalAlignment="Center" Width="Auto" />-->
+                <ComboBox Grid.Column="3" Grid.Row="2" Height="23" HorizontalAlignment="Stretch" Margin="3" Name="purposeCombobox" 
+                          SelectedValue="{Binding Path=Auto.PurposeId, Mode=OneWay, NotifyOnValidationError=true, ValidatesOnExceptions=true, TargetNullValue=''}" VerticalAlignment="Center" Width="Auto" Grid.ColumnSpan="1" Grid.RowSpan="1" 
+                          SelectedValuePath="PurposeId" 
+                          DisplayMemberPath="Name" 
+                          ItemsSource="{Binding ElementName=LayoutRoot, Path=DataContext.Purposes}" />
+                <sdk:Label Content="Рег. номер:" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" Grid.ColumnSpan="1" Grid.RowSpan="1" />
+                <TextBox Grid.Column="3" Height="26" HorizontalAlignment="Stretch" Margin="3,2,0,2" Name="regNumberTextBox" Text="{Binding Path=Auto.RegNumber, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true, TargetNullValue=''}" VerticalAlignment="Center" Width="Auto" Grid.Row="1" />
+                <sdk:Label Content="Брой места:" Grid.Column="2" Grid.Row="4" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" Grid.ColumnSpan="1" Grid.RowSpan="1" />
+                <TextBox Grid.Column="3" Grid.Row="4" Height="23" HorizontalAlignment="Stretch" Margin="3" Name="seatsCountTextBox" Text="{Binding Path=Auto.SeatsCount, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true, TargetNullValue=''}" VerticalAlignment="Center" Width="Auto" Grid.ColumnSpan="1" Grid.RowSpan="1" />
+                <sdk:Label Content="Цвят:" Grid.Column="2" Grid.Row="8" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" Grid.ColumnSpan="1" Grid.RowSpan="1" />
+                <TextBox Grid.Column="3" Grid.Row="8" Height="23" HorizontalAlignment="Stretch" Margin="3" Name="colorTextBox" Text="{Binding Path=Auto.Color, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true, TargetNullValue=''}" VerticalAlignment="Center" Width="Auto" Grid.ColumnSpan="1" Grid.RowSpan="1" />
+                <sdk:Label Content="Собственик- ЕГН" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Center" Grid.Column="2" Grid.Row="13" />
+                <TextBox Grid.Column="3" Height="23" HorizontalAlignment="Stretch" Margin="3" Name="ownerNUmberTextBox" Text="{Binding Path=Auto.Person.Number, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true, TargetNullValue=''}" VerticalAlignment="Center" Width="Auto" Grid.Row="13" />
+            </Grid>
+            <!--<TextBox Grid.ColumnSpan="2" Grid.Column="1"  Height="26" HorizontalAlignment="Stretch" Margin="3,0,3,3" Name="companyIdTextBox" Text="{Binding Path=CompanyId, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true, TargetNullValue=''}" VerticalAlignment="Center" Width="Auto" />-->
+            <ComboBox Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" Height="23" HorizontalAlignment="Stretch" Margin="3" 
+                         Name="CompanyComboBox" 
+                         SelectedValue="{Binding Path=CompanyId, Mode=OneWay, NotifyOnValidationError=true, ValidatesOnExceptions=true, TargetNullValue=''}" VerticalAlignment="Center" Width="Auto"  Grid.RowSpan="1" 
+                          SelectedValuePath="CompanyId"
+                          DisplayMemberPath="Name"
+                          ItemsSource="{Binding ElementName=LayoutRoot, Path=DataContext.Companys}"
+                          />
+        </Grid>
+        <StackPanel  Grid.Column="0" Grid.Row="2" Orientation="Horizontal">
+            <Button Content="Изпрати" Command="{Binding Path=SaveInsurancePolicyCommand}"/>
+            <Button Content="Откажи" />
+        </StackPanel>
+    </Grid>
+</UserControl>

@@ -1,0 +1,21 @@
+﻿<navigation:Page xmlns:my="clr-namespace:AutoInsurance.Views"  xmlns:toolkit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Toolkit"  x:Class="AutoInsurance.Views.CalculateInsurancePrice" 
+           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+           mc:Ignorable="d"
+           xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation"
+           d:DesignWidth="640" d:DesignHeight="480"
+           Title="CalculateInsurancePrice Page">
+    <Grid x:Name="LayoutRoot">
+        <ScrollViewer x:Name="PageScrollViewer" Style="{StaticResource PageScrollViewerStyle}" >
+            <StackPanel>
+                <StackPanel x:Name="ContentStackPanel" Style="{StaticResource ContentStackPanelStyle}">
+                    <TextBlock x:Name="HeaderText" Style="{StaticResource HeaderTextStyle}" 
+                           Text="Калкулиране на цена на застраховка &quot;Гражданска Отговорност&quot;" HorizontalAlignment="Center" />
+                </StackPanel>
+                <my:CalculateInsurancePriceControl></my:CalculateInsurancePriceControl>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</navigation:Page>
